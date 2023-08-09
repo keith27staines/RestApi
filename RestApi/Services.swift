@@ -205,11 +205,7 @@ class ServicePerformer {
     
     func performGetAll<DTO: Decodable>(endpoint: Endpoint, completion: @escaping (Result<[DTO], ServiceError>) -> Void) {
         
-        let url = baseURL.appendingPathComponent(endpoint.rawValue)
-        var request = URLRequest(url: url)
-        request.httpMethod = HTTPMethod.get.rawValue
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        let request = buildRequest(endpoint: endpoint)
         let session = URLSession.shared
         
         let task = session.dataTask(with: request) { data, response, error in
@@ -252,7 +248,18 @@ class ServicePerformer {
         // actually execute the task
         task.resume()
     }
+    
+    func buildRequest(endpoint: Endpoint) -> URLRequest {
+        let url = baseURL.appendingPathComponent(endpoint.rawValue)
+        var request = URLRequest(url: url)
+        request.httpMethod = HTTPMethod.get.rawValue
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        return request
+    }
 }
+
+// MARK: with the request permformer factored out, the service classes are small and easily testable, which is great... but there are also a lot of them, all doing more or less the same thing, which is not so great :(
 
 class PostsService {
     private let servicePerformer: ServicePerformer
@@ -334,7 +341,7 @@ class UsersService {
     }
 }
 
-// MARK: Ah, heck, there must be a better way!
+// MARK: Ah, heck, too many in fact. There must be a better way! (and there is)
 
 class GenericService<T> where T:ListAdaptable & Decodable {
     private let servicePerformer: ServicePerformer

@@ -5,10 +5,10 @@
 //  Created by Keith Staines on 08/08/2023.
 //
 // Data transfer objects compatible with the REST api
-// available on
+// served by:
 // https://jsonplaceholder.typicode.com
 // Note that the User model contains only a subset of the fields held in the
-// typicode database
+// typicode database (I was too lazy to add them all!)
 
 struct Post: Codable {
     let id: Int
