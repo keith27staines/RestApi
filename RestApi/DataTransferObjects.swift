@@ -36,7 +36,7 @@ struct Photo: Codable {
     let albumId: Int
     let title: String
     let url: String
-    let thumbnail: String
+    let thumbnailUrl: String
 }
 
 struct Todo: Codable {
