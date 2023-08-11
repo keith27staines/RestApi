@@ -7,8 +7,10 @@
 
 import Foundation
 
+//MARK: Talking point: I have used a bang. Is this justifiable in production code?
 let baseURL = URL(string: "https://jsonplaceholder.typicode.com/")!
 
+// MARK: Talking point: is an enum a good choice for endpoints?
 enum Endpoint: String, CaseIterable {
     case posts
     case comments

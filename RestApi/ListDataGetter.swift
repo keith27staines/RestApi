@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// Okay, we understand the pattern now, we can leap straight into a fully generic data getter for the list view
+/// without going through the stages of writing custom ones for each DTO type
 class ListDataGetter<T> where T: ListAdaptable & Decodable {
     let service: GenericService<T>
 
