@@ -43,6 +43,16 @@ class MainViewController: UIViewController {
         show(MakeListViewControllerForEndpoint(endpoint), sender: self)
     }
     
+    // MARK: Talking point:
+    // The use of an enum to hold our endpoints is convenient but has a flaw:
+    // Adding a new enpoint to the Enpoint enum means we will have to modify this
+    // method too - breaking the open/closed principle.
+    // Ideally, we ought to rethink our decision to use an enum for Endpoints,
+    // but this has to be balanced against the convenience enums provide, and
+    // how likely it is for new endpoints to be added (or removed).
+    // I'll leave it as an exercise for anyone who wants to try this to replace
+    // the endpoint enum with some other structure that allows for endpoints to
+    // be added.
     func MakeListViewControllerForEndpoint(_ endpoint: Endpoint) -> UIViewController {
         let vc: UIViewController
         switch endpoint {

@@ -7,16 +7,19 @@
 
 import Foundation
 
+/// A struct that contains the data that can be displayed in a base UITableViewCell
 struct ListDisplayable {
     let id: Int
     let title: String
     let subtitle: String
 }
 
+/// This protocol promises to adapt an instance of any of the DTO objects to a `ListDisplayable`
 protocol ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable
 }
 
+/// Adapt `Post` to `ListDisplayable`
 extension Post: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -27,6 +30,7 @@ extension Post: ListAdaptable {
     }
 }
 
+/// Adapt `Comment` to `ListDisplayable`
 extension Comment: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -37,6 +41,7 @@ extension Comment: ListAdaptable {
     }
 }
 
+/// Adapt `Album` to `ListDisplayable`
 extension Album: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -47,6 +52,7 @@ extension Album: ListAdaptable {
     }
 }
 
+/// Adapt `Photo` to `ListDisplayable`
 extension Photo: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -57,6 +63,7 @@ extension Photo: ListAdaptable {
     }
 }
 
+/// Adapt `Todo` to `ListDisplayable`
 extension Todo: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -67,6 +74,7 @@ extension Todo: ListAdaptable {
     }
 }
 
+/// Adapt `User` to `ListDisplayable`
 extension User: ListAdaptable {
     func adaptToListDisplayable() -> ListDisplayable {
         ListDisplayable(
@@ -77,6 +85,7 @@ extension User: ListAdaptable {
     }
 }
 
+/// Adapt an entire array of `ListAdaptable` elements to an array of `ListDisplayable` objects
 extension Array where Element: ListAdaptable {
     func adaptToListDisplayable() -> [ListDisplayable] {
         map { item in
